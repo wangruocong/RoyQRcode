@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>B16E5C46-6D63-4E2D-B6E0-679A1F3E07D4</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>RoyQRcodeExample</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>350AF8B789A098CE283EB141C43B27848B1075A0</key>
 		<string>https://github.com/wangruocong/RoyQRcode.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RoyQRcodeExample/RoyQRcodeExample.xcodeproj/project.xcworkspace</string>
+	<string>RoyQRcodeExample/RoyQRcodeExample.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>350AF8B789A098CE283EB141C43B27848B1075A0</key>
