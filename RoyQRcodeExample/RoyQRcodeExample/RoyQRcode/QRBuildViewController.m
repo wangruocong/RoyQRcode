@@ -11,11 +11,13 @@
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define BuilderButtonWidth 60
+#define BuilderTextFieldHeight 40
 #define MyColor(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0];
 
-@interface QRBuildViewController ()
+@interface QRBuildViewController ()<UITextFieldDelegate>
 {
-    UITextField *textField;
+    UITextField *_textField;
     UIImageView *QRView;
     NSString *QRString;
 }
@@ -27,8 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"My QR code", nil);
-    self.view.backgroundColor = [UIColor whiteColor];
     [self buildUI];
     QRString = @"Roy";
     [self gen];
@@ -44,25 +44,26 @@
 
 
 -(void)buildUI{
-    //二维码
-    //宽度
-    CGFloat QRWidth = SCREEN_WIDTH*0.6;
-    QRView = [[UIImageView alloc] init];
-    QRView.frame = CGRectMake((SCREEN_WIDTH-QRWidth)/2, SCREEN_HEIGHT*0.3, QRWidth, QRWidth);
-    QRView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.view addSubview:QRView];
+    self.title = NSLocalizedString(@"生成二维码", nil);
+    self.view.backgroundColor = [UIColor whiteColor];
     
+
+
     //输入框
-    textField = [[UITextField alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-QRWidth)/2-40, 100, QRWidth+40, 40)];
-    textField.backgroundColor = [UIColor whiteColor];
-    textField.placeholder = @"input something";
-    textField.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    textField.layer.borderWidth = 1;
-    [self.view addSubview:textField];
+    float y = 74;
+    _textField = [[UITextField alloc]initWithFrame:CGRectMake(10, y, self.view.bounds.size.width-10*2-3-BuilderButtonWidth, BuilderTextFieldHeight)];
+    _textField.backgroundColor = [UIColor whiteColor];
+    _textField.placeholder = @"输入字符生成二维码";
+    _textField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _textField.layer.borderWidth = 1;
+    _textField.clearButtonMode = UITextFieldViewModeAlways;
+    _textField.returnKeyType = UIReturnKeyDone;
+    _textField.delegate = self;
+    [self.view addSubview:_textField];
     
     //确认button
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-QRWidth)/2+textField.frame.size.width-32, 100, 70, 40)];
-    [btn setTitle:@"genrate" forState:UIControlStateNormal];
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(_textField.frame.origin.x+_textField.frame.size.width+3, y, BuilderButtonWidth, BuilderTextFieldHeight)];
+    [btn setTitle:@"生成" forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor whiteColor];
     [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -70,8 +71,23 @@
     [btn addTarget:self action:@selector(btnTaped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
+    
+    
+    //二维码
+    y += BuilderTextFieldHeight;
+    y += 10;
+    QRView = [[UIImageView alloc] init];
+    QRView.center = self.view.center;
+    QRView.frame = CGRectMake(10, y, self.view.bounds.size.width-10*2, self.view.bounds.size.width-10*2);
+    QRView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:QRView];
+    
     //labelView
-    UIView *addView = [[UIView alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-QRWidth-60)/2, SCREEN_HEIGHT*0.65, QRWidth+60, 30)];
+    
+    y += QRView.bounds.size.height;
+    y += 5;
+    
+    UIView *addView = [[UIView alloc]initWithFrame:CGRectMake(QRView.frame.origin.x, y, QRView.frame.size.width, 30)];
     addView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:242.0/255.0 blue:243.0/255.0 alpha:1];
     UILabel *addLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, addView.frame.size.width-30, 30)];
     addLabel.textColor = [UIColor grayColor];
@@ -84,8 +100,8 @@
 }
 - (void)btnTaped
 {
-    [textField resignFirstResponder];
-    QRString = textField.text;
+    [_textField resignFirstResponder];
+    QRString = _textField.text;
     [self gen];
 }
 //生成二维码的方法
@@ -93,6 +109,17 @@
     QRView.image = [self qrCodeImageWithString:QRString];
 }
 
+
+#pragma mark UItextField delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [_textField resignFirstResponder];
+    QRString = _textField.text;
+    [self gen];
+    
+    return YES;
+}
+
+#pragma mark- 相册读取相关
 
 -(UIImage*)qrCodeImageWithString:(NSString*)str{
     if (str && [str isKindOfClass:[NSString class]] && str.length > 0) {
