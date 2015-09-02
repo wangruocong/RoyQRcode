@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="e9l-n9-bzW">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="yr6-x2-Olo">
+            <objects>
+                <navigationController id="e9l-n9-bzW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mAe-CB-ZrW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="EMt-0o-nuB" kind="relationship" relationship="rootViewController" id="vQV-23-SHY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AB0-mg-B2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="223" y="563"/>
+        </scene>
+        <!--RoyQRcode-->
+        <scene sceneID="N6U-97-x0b">
+            <objects>
+                <viewController id="EMt-0o-nuB" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gta-cs-WC0"/>
+                        <viewControllerLayoutGuide type="bottom" id="UUj-9u-eNn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eYy-1Y-rlb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3y-fc-YrP">
+                                <rect key="frame" x="250" y="191" width="100" height="30"/>
+                                <state key="normal" title="Scan QR code">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="Scan_QR_code_Btn:" destination="EMt-0o-nuB" eventType="touchUpInside" id="IIG-ke-B0A"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEK-wY-whW">
+                                <rect key="frame" x="236" y="229" width="128" height="30"/>
+                                <state key="normal" title="Generate QR code">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="Show_QR_code_Btn:" destination="EMt-0o-nuB" eventType="touchUpInside" id="Irz-wd-GEI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="P3y-fc-YrP" secondAttribute="centerY" constant="94" id="VeF-Rc-J9X"/>
+                            <constraint firstAttribute="centerX" secondItem="P3y-fc-YrP" secondAttribute="centerX" id="cme-iG-9UA"/>
+                            <constraint firstItem="HEK-wY-whW" firstAttribute="top" secondItem="P3y-fc-YrP" secondAttribute="bottom" constant="8" symbolic="YES" id="dLl-Rp-U2N"/>
+                            <constraint firstItem="HEK-wY-whW" firstAttribute="centerX" secondItem="P3y-fc-YrP" secondAttribute="centerX" id="snN-CY-4Wn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="RoyQRcode" id="FNu-po-HKz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6jt-44-Tad" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="853" y="558"/>
+        </scene>
+    </scenes>
+</document>
