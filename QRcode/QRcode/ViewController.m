@@ -18,7 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    //test
 }
+- (void)test{
+    //
+};
 
 - (IBAction)scan:(UIButton *)sender {
     QRViewController *qrVC = [[QRViewController alloc]init];
